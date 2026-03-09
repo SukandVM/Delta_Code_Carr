@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Phase III: Randomized 10x10 Cursed Waters</title>
+    <title>Phase III: Cursed Waters</title>
     <style>
         :root {
             --parchment: #f4e4bc;
@@ -117,7 +117,7 @@
         </div>
 
         <div style="font-size: 0.85rem; text-align: center; margin: 10px 0; color: #555;">
-            <b>Shield Logic:</b> $$Freq = ((Latitude \times 7) + (Enemies\_Left \times 3)) \pmod{10}$$
+            <b>Shield Logic:</b> $Freq = ((Latitude \times 7) + (Enemies\_Left \times 3)) \pmod{10}$
         </div>
 
         <div class="controls">
@@ -131,7 +131,7 @@
 
     <div id="leaderboard-ui" class="hidden">
         <h1>📜 THE CAPTAIN'S LOG</h1>
-        <table>
+        <table style="width: 100%; border-collapse: collapse;">
             <thead>
                 <tr style="border-bottom: 2px solid var(--ink);">
                     <th>PIRATE</th><th>HP</th><th>AMMO</th><th>PLUNDER</th>
@@ -145,9 +145,11 @@
 </div>
 
 <script>
-    let hp = 100; 
-    let ammo = 25; 
-    let enemies = 5; 
+    console.log("%c SECRET CAMPUS CARGO: U3RlcCBwYXN0IHRoZSBpcm9uIGdhdGVzIHdoZXJlIHRoZSBzdG9uZSBzY2hvbGFycyBzaWxlbnQgc3RhbmQsClNlZWsgdGhlIGZvdW50YWluIG9mIHdpc2RvbSBpbiB0aGUgY2VudGVyIG9mIHRoZSBsYW5kLgpUcmVhZCB0aGUgZHVzdHkgcGF0aHMgd2hlcmUgdGhlIHNoYWRvd3Mgb2YgdGhlIGFyY2hlcyBmYWxsLApCdXQgdGhlIHRyZWFzdXJlIGlzbid0IGJ1cmllZCBuZWFyIHRoZSBjaGFwZWwgb3IgdGhlIGhhbGwuCkZvbGxvdyB0aGUgaW52aXNpYmxlIGN1cnJlbnQgdGhyb3VnaCB0aGUgd2FsbHMgb2YgYnJpY2sgYW5kIGxpbWUsClRvIHRoZSBjb2xkLCBodW1taW5nIGhlYXJ0IHRoYXQgZXhpc3RzIG91dHNpZGUgb2YgdGltZS4KQSBmb3Jlc3Qgb2YgYmxhY2sgdG93ZXJzIHdpdGggZnJ1aXQgb2YgbGlxdWlkIGxpZ2h0LApXaGVyZSB0aGUgZnJvc3Qgb2YgdGhlIHdpbnRlciByZWF0aCBibG93cyBpbiBkYXkgYW5kIG5pZ2h0LgpUaGUgYW5jaG9yIGlzIGF0IHlvdXIgZmluZ2VydGlwcywgdGhlIG1hcCBpcyBpbiB5b3VyIGV5ZSwKWW91J3ZlIGZvdW5kIHRoZSBTZWNyZXQgQXJlbmEgYmVuZWF0aCBhIHNpbGljb24gc2t5Lg==", "color: gold; background: black; font-size: 14px; padding: 10px; border: 2px solid gold;");
+
+    let hp = 100; //
+    let ammo = 25; //
+    let enemies = 5; //
     let enemyLats = [];
 
     function randomizeShips() {
@@ -184,9 +186,9 @@
 
     function pingRadar() {
         if (ammo <= 0) return;
-        ammo--; 
+        ammo--; //
         const target = enemyLats[5 - enemies];
-        document.getElementById('radar-display').innerText = "DATA (B64): " + btoa(target.toString());
+        document.getElementById('radar-display').innerText = "DATA (B64): " + btoa(target.toString()); //
         updateUI();
     }
 
@@ -214,11 +216,12 @@
             fb.innerText = "DIRECT HIT! TARGET SCUTTLED!";
             fb.style.color = "green";
         } else {
-            hp -= 20; 
+            hp -= 20; //
             cell.innerText = "🌊";
             cell.classList.add('miss');
             fb.style.color = "red";
             
+            //
             if (uLat < actualLat) {
                 fb.innerText = "🌊 MISS! SHOT TOO FAR SOUTH (Lat < Target)!";
             } else if (uLat > actualLat) {
@@ -243,7 +246,7 @@
         document.getElementById('battle-ui').classList.add('hidden');
         document.getElementById('leaderboard-ui').classList.remove('hidden');
         if (victory) {
-            const score = (hp * 10) + (ammo * 50);
+            const score = (hp * 10) + (ammo * 50); //
             const name = prompt("Enter your name for the Captain's Log:");
             document.getElementById('board-body').innerHTML += `<tr><td>${name||'Pirate'}</td><td>${hp}</td><td>${ammo}</td><td><strong>${score} Gold</strong></td></tr>`;
         } else {
