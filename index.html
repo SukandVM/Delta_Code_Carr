@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Phase III: Cursed Waters</title>
+    <title>Phase III: Randomized 10x10 Cursed Waters</title>
     <style>
         :root {
             --parchment: #f4e4bc;
@@ -145,12 +145,11 @@
 </div>
 
 <script>
-    let hp = 100; //
-    let ammo = 25; // Scaled proportionally
+    let hp = 100; 
+    let ammo = 25; 
     let enemies = 5; 
     let enemyLats = [];
 
-    // --- RANDOMIZATION LOGIC ---
     function randomizeShips() {
         const lats = [];
         while(lats.length < 5) {
@@ -185,9 +184,9 @@
 
     function pingRadar() {
         if (ammo <= 0) return;
-        ammo--; //
+        ammo--; 
         const target = enemyLats[5 - enemies];
-        document.getElementById('radar-display').innerText = "DATA (B64): " + btoa(target.toString()); //
+        document.getElementById('radar-display').innerText = "DATA (B64): " + btoa(target.toString());
         updateUI();
     }
 
@@ -215,12 +214,11 @@
             fb.innerText = "DIRECT HIT! TARGET SCUTTLED!";
             fb.style.color = "green";
         } else {
-            hp -= 20; //
+            hp -= 20; 
             cell.innerText = "🌊";
             cell.classList.add('miss');
             fb.style.color = "red";
             
-            //
             if (uLat < actualLat) {
                 fb.innerText = "🌊 MISS! SHOT TOO FAR SOUTH (Lat < Target)!";
             } else if (uLat > actualLat) {
@@ -245,7 +243,7 @@
         document.getElementById('battle-ui').classList.add('hidden');
         document.getElementById('leaderboard-ui').classList.remove('hidden');
         if (victory) {
-            const score = (hp * 10) + (ammo * 50); //
+            const score = (hp * 10) + (ammo * 50);
             const name = prompt("Enter your name for the Captain's Log:");
             document.getElementById('board-body').innerHTML += `<tr><td>${name||'Pirate'}</td><td>${hp}</td><td>${ammo}</td><td><strong>${score} Gold</strong></td></tr>`;
         } else {
@@ -259,4 +257,3 @@
 
 </body>
 </html>
-
